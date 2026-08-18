@@ -1,6 +1,6 @@
-# 🛡️ Cybersecurity Research Paper Notes
+#  Cybersecurity Research Paper Notes
 
-> A curated collection of personal reading notes, technical analyses, and security research breakdowns from top-tier security conferences (USENIX Security, IEEE S&P, ACM CCS, NDSS) and journals.
+> A curated collection of personal reading notes, technical analyses, and security research breakdowns from security conferences (USENIX Security, IEEE S&P, ACM CCS, NDSS) and journals.
 
 ---
 
@@ -20,3 +20,9 @@ This repository serves as a continuous learning journal focused on offensive/def
 ├── IoT-Security/          # Embedded systems, Firmware analysis, Hardware security
 ├── Web-Defensive/         # WAF bypass, Logic bugs, Zero-day analysis
 └── README.md
+
+## 📜 Reading Log
+
+| Date Read | Paper Title | Venue / Year | Domain | Key Takeaway (1-Sentence) | Note Link |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 2026-08-18 | A Survey on IoT Security: Requirements, Challenges, and Solutions | Elsevier '19 | IoT Security | Structural breakdown of 3-tier IoT architecture attacks and mitigation strategies. | [Read Note](./IoT-Security/2019-HaddadPajouh-iot-security-survey.md) |
