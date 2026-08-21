@@ -1,12 +1,12 @@
 #  Cybersecurity Research Paper Notes
 
-> A daily collection of personal reading notes, technical analyses, and security research breakdowns from security conferences (USENIX Security, IEEE S&P, ACM CCS, NDSS) and journals.
+> A daily collection of personal reading notes, technical analyses, and security research breakdowns.
 
 ---
 
 ## 📌 Overview
 
-This repository serves as a continuous learning journal focused on cyber securit. Each note extracts core threat models, technical exploitation/mitigation mechanics, and actionable takeaways.
+This repository serves as a continuous learning journal focused on cyber security. Each note extracts technical exploitation/mitigation mechanics, and actionable takeaways.
 
 ---
 
@@ -14,14 +14,14 @@ This repository serves as a continuous learning journal focused on cyber securit
 
 ```text
 .
-├── AI-Security/           # LLM security, Adversarial ML, Prompt Injection
-├── Binary-Exploitation/   # Kernel bugs, Heap/Stack exploitation, Fuzzing
-├── Cloud-Security/        # Container escapes, IAM misconfigs, Kubernetes
-├── IoT-Security/          # Embedded systems, Firmware analysis, Hardware security
-├── Web-Defensive/         # WAF bypass, Logic bugs, Zero-day analysis
+├── AI-Security/          
+├── Binary-Exploitation/  
+├── Cloud-Security/       
+├── IoT-Security/         
+├── Web-Defensive/         
 └── README.md
 ```
-## 📜 Reading Log
+## Reading Log
 
 | Date Read | Paper Title | Venue / Year | Domain | Key Takeaway (1-Sentence) | Note Link |
 | :--- | :--- | :--- | :--- | :--- | :--- |
