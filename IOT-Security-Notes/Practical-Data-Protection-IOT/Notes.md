@@ -3,51 +3,7 @@
 > **Original Paper:** Fernandes et al., *"FlowFence: Practical Data Protection for Emerging IoT Application Frameworks"*, 25th USENIX Security Symposium (2016).  
 > **Source Paper Link:** [USENIX Security '16 PDF](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_fernandes.pdf)
 
----
 
-## 📌 Overview & Motivation
-
-### Why FlowFence?
-Modern IoT application frameworks (e.g., Samsung SmartThings, Apple HomeKit, Google Fit) rely on **permission-based access control**. While permissions act as gatekeepers to sensitive data sources (cameras, door locks, heart rate sensors), they offer **zero control** over how applications process or transmit that data once access is granted.
-
-This introduces severe security risks:
-* An app granted access to a camera (to unlock a door via face recognition) and the Internet (to send lock state notifications) can secretly exfiltrate raw camera streams to the web.
-* Existing solutions like Dynamic Taint Analysis incur massive performance/memory overhead and struggle with implicit flows or concurrency.
-
-### What is FlowFence?
-**FlowFence** is an IoT security architecture that enforces **Information Flow Control (IFC)** between data sources (sensors/publishers) and data sinks (actuators/network). It forces third-party apps to declare their data flow policies at installation and guarantees that **undeclared flows are strictly blocked at runtime**.
-
----
-
-##  How It Works: Opacified Computation
-
-FlowFence introduces **Opacified Computation**, a model where apps are split into two distinct execution tiers:
-+-----------------------------------------------------------------------+
-|                         Non-Sensitive Code                            |
-|             (Orchestrates execution, handles handles only)             |
-+-----------------------------------------------------------------------+
-|                                                       ^
-| Invokes QM with Opaque Handles                        | Returns
-v                                                       | Opaque Handle
-+-----------------------------------------------------------------------+
-|                    FlowFence Trusted Service                          |
-|  - Tracks Taints    - Enforces Policies    - Dereferences Handles     |
-+-----------------------------------------------------------------------+
-|                                                       ^
-| Executes in Sandboxed Environment                     | Raw Output
-v                                                       |
-+-----------------------------------------------------------------------+
-|                    Quarantined Modules (QMs)                          |
-|                (Process sensitive raw data in isolation)             |
-+-----------------------------------------------------------------------+
-
-```markdown
-# FlowFence: Practical Data Protection for Emerging IoT Frameworks
-
-> **Original Paper:** Fernandes et al., *"FlowFence: Practical Data Protection for Emerging IoT Application Frameworks"*, 25th USENIX Security Symposium (2016).  
-> **Source Paper Link:** [USENIX Security '16 PDF](https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_fernandes.pdf)
-
----
 
 ## 📌 Overview & Motivation
 
@@ -120,7 +76,7 @@ v                                                       |
 
 ---
 
-## ⚠️Limitations & Future Work
+## Limitations & Future Work
 
 * **Side-Channel Leaks:** QM execution time can potentially encode sensitive bits (timing attacks). Mitigation requires scheduling QMs using deterministic or predictive timing bounds.
 * **Overtainting & Poison-Pill Attacks:** Malicious publishers could broadcast heavily-tainted data onto public channels to intentionally "poison" consumers and prevent them from sinking data. FlowFence mitigates this via **Taint Bounds ($TM_c$)** on channels.
