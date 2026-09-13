@@ -8,98 +8,62 @@
 **Year:** 2015  
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
+**1. The Core Functions**
+NIST introduced the SHA-3 family not to replace SHA-2, but to act as a solid backup plan. It uses a completely different architecture to stay safe just in case someone finds a major flaw in the older algorithms.
 
+Fixed-Length Hash Functions:
 
-**Summary (Introduction & Glossary):**
+* Includes SHA3-224, SHA3-256, SHA3-384, and SHA3-512.
 
-* **Purpose:** Standardizes the SHA-3 family of functions based on the KECCAK algorithm (winner of the NIST SHA-3 Cryptographic Hash Algorithm Competition) to complement existing SHA-1 and SHA-2 standards.
+* They act as easy, drop-in replacements for SHA-2 since the output lengths match up perfectly.
 
-* **Standardized Functions:**
+* They provide strong collision and preimage resistance based on their output lengths.
 
-   4 Cryptographic Hash Functions: SHA3-224, SHA3-256, SHA3-384, and SHA3-512 with fixed output digest lengths.
+Extendable-Output Functions (XOFs):
 
-   2 Extendable-Output Functions (XOFs): SHAKE128 and SHAKE256, allowing arbitrary output lengths tailored to application requirements.
+* Includes SHAKE128 and SHAKE256.
 
-* **Core Architecture:** Built upon the sponge construction using underlying KECCAK-p mathematical permutations.
-# SHA-3 / KECCAK Permutation Specification
+* These are super cool because you can generate variable-length outputs, which is great for things like key derivation.
 
-> Tài liệu tóm tắt & chuẩn hóa kỹ thuật hoán vị KECCAK-p (Theo chuẩn FIPS 202)
+Note: The numbers (128 or 256) represent their overall security strength, not how long the output is.
 
----
+**2. The Sponge Construction**
+SHA-3 ditches the old Merkle-Damgård structure (which SHA-1 and SHA-2 used) and uses something called the Sponge Construction. It has a fixed-size internal state and works in two main steps:
 
-# KECCAK-p / SHA-3 Permutation Summary
+* Absorb Phase: It basically "soaks up" the input message by breaking it into chunks (called the Rate) and mixing it into the state using an XOR operation, followed by a mixing function.
 
-## 1. Core Parameters & Terms
-* **State ($A$)**: $5 \times 5 \times w$ array, where $w = b/25 \in \{1, 2, 4, 8, 16, 32, 64\}$ bits (*SHA-3 default: $b=1600, w=64$*).
-* **Capacity ($c$)**: $c = b - r$ ($b$: width, $r$: rate).
-* **Key Subparts**:
-  * **Lane**: $w$-bit word at $(x, y)$. Maps to a single 64-bit CPU word when $b=1600$.
-  * **Slice**: 25-bit array at fixed $z$. Center at $(0, 0)$.
+* Squeeze Phase: It "wrings out" the output in chunks. If you need a longer output (like with XOFs), it just keeps applying the mixing function and squeezing out more bits.
 
-## 2. Permutation Mechanics
-* **Round Function ($\text{Rnd}$)**: 5 sequential step mappings:
-  $$\theta \longrightarrow \rho \longrightarrow \pi \longrightarrow \chi \longrightarrow \iota$$
-  * $\theta, \rho, \pi, \chi$: Round-independent linear/non-linear transformations.
-  * $\iota$: Injects round constants (round-dependent).
+* The Big Trade-off: The internal state is split into two parts: Rate and Capacity. A higher Rate means faster processing, but a higher Capacity gives you better security.
 
-* **State Indexing**: $1\text{D Bitstring } (S) \leftrightarrow 3\text{D Array } (A)$
-  $$A[x, y, z] = S[w(5y + x) + z]$$
-  * Reconstructed via concatenation: $\text{Lanes} \to \text{Planes} \to \text{Full State } (S)$.
+**3. How KECCAK Works Under the Hood**
+The real heavy lifting of the algorithm happens in the KECCAK-p permutations. It treats the data like a 3D block (5x5xW) and scrambles it through multiple rounds using five specific steps:
 
-# Permutations KECCAK-p (Section 3)
+* Theta: Mixes up the columns to spread the data around (diffusion).
 
-## 1. Core State Structure (Section 3.1)
-- **State Array (A):** 3D array of size 5 x 5 x w, where w = 2^l is the lane length (w in {1, 2, 4, 8, 16, 32, 64}).
-- **Total State Width (b):** b = 5 x 5 x w = 25w bits (standard SHA-3 uses b = 1600, w = 64).
-- **Key Concepts:**
-  - `Lane`: A[i, j, :] (1D array of w bits along z-axis)
-  - `Row`: A[:, j, z] (5 bits along x-axis)
-  - `Column`: A[i, :, z] (5 bits along y-axis)
-  - `Slice`: A[:, :, z] (5x5 matrix of 25 bits at a fixed z)
+* Rho: Rotates the bits for extra dispersion.
 
----
+* Pi: Shuffles and rearranges the lanes.
 
-## 2. Step Mappings / Round Transformation (Section 3.2)
-Each round applies 5 step mappings sequentially: Rnd(A, ir) = iota(chi(pi(rho(theta(A)))), ir).
+* Chi: The only non-linear step—it substitutes bits along the rows to make the math unpredictable.
 
-### 2.1 Theta - Linear Diffusion
-- **Purpose:** Linear diffusion across columns.
-- **Mechanism:** XOR each bit with the parity of two adjacent columns (x-1 and x+1).
-- **Operation:**
-  1. C[x, z] = A[x, 0, z] XOR A[x, 1, z] XOR A[x, 2, z] XOR A[x, 3, z] XOR A[x, 4, z]
-  2. D[x, z] = C[(x-1) mod 5, z] XOR C[(x+1) mod 5, (z-1) mod w]
-  3. A'[x, y, z] = A[x, y, z] XOR D[x, z]
+* Iota: Adds a round constant so that all the rounds don't look perfectly symmetrical.
 
-### 2.2 Rho - Intra-Lane Bit Rotation
-- **Purpose:** Bit dispersion along the z-axis (time/position dispersion).
-- **Mechanism:** Rotates bits within each lane by a fixed offset.
-- **Operation:**
-  - A'[x, y, z] = A[x, y, (z - offset[x, y]) mod w]
-  - Offset at (0, 0) is 0; other 24 offsets are predetermined constants.
+**4. Padding and Domain Separation**
+Multi-rate Padding (pad10*1): To make sure the message fits perfectly into the required block size, it tacks on a 1, fills the rest with 0s, and ends with another 1.
 
-### 2.3 Pi - Inter-Lane Permutation
-- **Purpose:** Spatial mixing across x and y coordinates.
-- **Mechanism:** Permutes lane positions in the 5 x 5 grid.
-- **Operation:**
-  - A'[(x + 3y) mod 5, x, z] = A[x, y, z]
-  - Keeps (0, 0) fixed.
+Domain Separation: To stop cross-protocol attacks (like someone tricking a SHA3-256 hash into matching a SHAKE256 output), it appends a specific suffix right before padding:
 
-### 2.4 Chi - Non-Linear Layer
-- **Purpose:** Provides cryptographic non-linearity (S-box equivalent).
-- **Mechanism:** Operates row-wise (x-axis) using AND, NOT, and XOR.
-- **Operation:**
-  - A'[x, y, z] = A[x, y, z] XOR ((NOT A[(x+1) mod 5, y, z]) AND A[(x+2) mod 5, y, z])
+* 01 for standard SHA-3 hashes.
 
-### 2.5 Iota - Symmetry Breaking
-- **Purpose:** Destroys structural symmetries across rounds.
-- **Mechanism:** XORs a round constant RC[ir] into the origin lane A[0, 0].
-- **Operation:**
-  - A'[0, 0, z] = A[0, 0, z] XOR RC[ir][z]
-  - All other 24 lanes remain unchanged.
+* 11 for SHAKE XOFs.
 
----
+**My Personal Takeaways**
+1. Architectural Diversity is a Must
+Moving away from the Merkle-Damgård structure shows a golden rule in cryptography: don't put all your eggs in one basket. By standardizing an algorithm with totally different math than SHA-2, NIST made sure that a single hacker breakthrough won't break all of our modern hashing standards at once.
 
-## 3. Permutation Construction & Parameters (Section 3.3 - 3.4)
-- **KECCAK-p[b, nr]:** Parameterized by width b and number of rounds nr.
-- **KECCAK-f[b]:** Special case of KECCAK-p where nr = 12 + 2l.
-- **SHA-3 Instance:** Uses KECCAK-p[1600, 24] (equivalent to KECCAK-f[1600]), where w = 64, l = 6, nr = 12 + 2(6) = 24.
+2. Domain Separation Actually Matters
+Learning about prefix vulnerabilities in XOFs was a huge eye-opener. If a shorter output is just a prefix of a longer one, attackers could reuse signatures across different protocols. It really drove home why you have to cleanly separate use cases (like using the 01 vs 11 suffixes).
+
+3. Speed vs. Security is Literally Built-in
+The relationship between Rate and Capacity in the Sponge construction is such a cool, tangible way to see the performance-vs-security trade-off. If you want a bigger Capacity (more security), you have to shrink the Rate (less speed). You are quite literally spending your system's throughput to buy better security margins.
