@@ -23,7 +23,7 @@ Extendable-Output Functions (XOFs):
 
 * Includes SHAKE128 and SHAKE256.
 
-* These are super cool because you can generate variable-length outputs, which is great for things like key derivation.
+* These can generate variable-length outputs, which is great for things like key derivation.
 
 Note: The numbers (128 or 256) represent their overall security strength, not how long the output is.
 
