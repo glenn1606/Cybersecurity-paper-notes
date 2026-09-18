@@ -13,8 +13,8 @@
 * **Adoption**: Deployed extensively across attackers (exploit generation), defenders, security auditors, and major software vendors (Google, Microsoft, Cisco, Adobe).
 * **Motivation**: Rapid growth led to terminology fragmentation (e.g., conflicting usages of "minimization") and undocumented design choices. The authors systematize the literature, propose a unified model fuzzer, and provide a comprehensive taxonomy.
 
----
-asd
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ### **2. Core Definitions & Terminology **
 * **Fuzzing**: Executing a PUT with inputs sampled from a space that protrudes its expected input space.
 * **Fuzz Testing**: Using fuzzing to evaluate whether a PUT violates a specified correctness policy.
@@ -27,7 +27,7 @@ asd
 ### **3. Paper Selection Criteria **
 * Surveyed papers published between January 2008 and February 2019 across 4 major security conferences (CCS, S&P, NDSS, USENIX Security) and 3 major software engineering conferences (FSE, ASE, ICSE) containing the keyword "fuzz".
 
----
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### **4. Generic Fuzz Testing Model **
 The paper formalizes fuzz testing into a generic model (**Algorithm 1**) consisting of two phases:
@@ -40,7 +40,7 @@ The paper formalizes fuzz testing into a generic model (**Algorithm 1**) consist
    * **`CONFUPDATE`**: Updates the set of fuzz configurations based on execution feedback.
    * **`CONTINUE`**: Evaluates whether to proceed with another iteration.
 
----
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### **5. Fuzzer Taxonomy **
 Fuzzers are categorized by the granularity of internal program semantics observed during execution:
@@ -48,7 +48,7 @@ Fuzzers are categorized by the granularity of internal program semantics observe
 * **White-box Fuzzer**: Analyzes internal code structures and execution states (e.g., Dynamic Symbolic Execution / Concolic Testing, Taint Analysis); achieves high precision but incurs heavy computational overhead.
 * **Grey-box Fuzzer**: Collects lightweight execution feedback (e.g., code/branch coverage) without full semantic analysis, balancing execution speed and exploration efficiency.
 
----
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### **6. Fuzzer Lineage & Preprocessing **
 * **Genealogy (Figure 1, p. 5)**: Maps fuzzer development chronologically from Miller et al. (1990) across black/grey/white-box categories and target domains (File, Network, Web, Kernel, Concurrency, UI).
@@ -58,4 +58,4 @@ Fuzzers are categorized by the granularity of internal program semantics observe
   * **Seed Selection & Trimming**: Applies minset algorithms to select minimal seed sets that maximize coverage, and trims individual seed file sizes to increase execution throughput.
   * **Driver Preparation**: Prepares wrapper drivers to target isolated components like libraries or kernel APIs.
 
----
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
