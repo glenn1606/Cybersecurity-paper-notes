@@ -98,3 +98,29 @@ The authors deliberately narrow their target:
 ---
 
 *(Notes end at Section 2; Sections 3 onward cover the seq2seq model details, the SampleFuzz algorithm, and the experimental results on the Edge PDF parser.)*
+
+# 1. Overview of Seq2Seq (Sequence-to-Sequence) Model
+
+- **Architecture (2 RNN Networks):**
+  - **Encoder RNN:** Compresses a variable-length input sequence into a fixed-dimensional context representation.
+  - **Decoder RNN:** Takes the fixed-dimensional context representation from the Encoder and generates a variable-length output sequence.
+- **Generation Mechanism:** The predicted character or token at time step `t` is fed directly as the input for the next time step `t + 1`.
+- **Conditional Probability:** Learns the conditional probability distribution `p(y_1, ..., y_T1 | x_1, ..., x_T2)` to generate target sequence `y` given input sequence `x`.
+
+---
+
+# 2. Chapter 3: Statistical Learning of Object Contents
+
+- **Objective:** Learns a generative language model over the character sequences of PDF objects.
+- **Key Advantage:** Overcomes the limited context window of traditional `n`-gram models by leveraging the seq2seq architecture.
+- **New Data Generation:** Once trained, the model generates new PDF objects by sampling from the learned probability distribution starting with an initial prefix (e.g., `"obj"`).
+
+---
+
+# 3. Data Preparation & Training Pipeline (Section 3.1)
+
+- **PDFs as Character Sequences:** Treats all PDF object files purely as raw sequence strings.
+- **Data Concatenation:** Concatenates all individual object files `s_1, s_2, ..., s_n` into one large unified character sequence `s_tilde`.
+- **Training Samples Splitting:** Slices the continuous sequence `s_tilde` into multiple fixed-size input chunks `t_i` of length `d`.
+- **Target Output Sequence Creation:** The target output sequence `o_t` is created by shifting the input sequence to the right by 1 character position (enabling the model to predict the next character).
+- **End-to-End Training:** Trains the seq2seq model end-to-end directly on these paired instances to learn the generative language model.
