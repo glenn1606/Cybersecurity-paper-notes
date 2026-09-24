@@ -124,3 +124,34 @@ The authors deliberately narrow their target:
 - **Training Samples Splitting:** Slices the continuous sequence `s_tilde` into multiple fixed-size input chunks `t_i` of length `d`.
 - **Target Output Sequence Creation:** The target output sequence `o_t` is created by shifting the input sequence to the right by 1 character position (enabling the model to predict the next character).
 - **End-to-End Training:** Trains the seq2seq model end-to-end directly on these paired instances to learn the generative language model.
+
+
+**SAMPLE FUZZ ALGORITHM**
+Step-by-Step Breakdown
+Start with a Prefix
+
+The algorithm begins building a text string starting with "obj ".
+
+Loop Until Finished
+
+It keeps predicting and appending characters one by one until it generates "endobj" (or hits a maximum safety length MAXLEN).
+
+Predict the Next Character
+
+At each step, it samples a candidate character c and gets its predicted probability p(c) from the trained model.
+
+Decide Whether to Fuzz
+
+The algorithm rolls a random probability p_fuzz.
+
+Fuzzing Trigger: Fuzzing occurs only if two conditions are met:
+
+p_fuzz > t_fuzz (a threshold condition to keep fuzzing rare and controlled).
+
+p(c) > p_t (the AI is highly confident that c is the correct character).
+
+The Swap: Instead of using the confident character c, it replaces c with c', the character with the lowest likelihood in the probability distribution.
+
+Append & Safety Check
+
+It appends the selected character (c or fuzzed c') to the sequence. If the sequence gets too long without finishing, it resets back to "obj " to prevent infinite loops.
