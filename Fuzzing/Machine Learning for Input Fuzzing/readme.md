@@ -89,9 +89,9 @@ PDFs support **incremental updates**: to "edit" an existing object (say, object 
 ### 2.5 Scope of this work (what they do and don't try to learn)
 The authors deliberately narrow their target:
 
-✅ **In scope:** learning the grammar of **non-binary PDF data objects** (formatted text objects like those above) — this is the bulk (~70%) of the spec, and it's **repetitive and structured**, which suits neural-network learning well.
+ **In scope:** learning the grammar of **non-binary PDF data objects** (formatted text objects like those above) — this is the bulk (~70%) of the spec, and it's **repetitive and structured**, which suits neural-network learning well.
 
-❌ **Out of scope:**
+ **Out of scope:**
 - **Cross-reference tables and trailers** — these involve numeric/pointer/counter constraints (addresses, counts) that seemed too complex and less promising to learn via neural nets.
 - **Binary data objects** (e.g. embedded images) — existing blackbox/whitebox fuzzing techniques already handle these effectively, so there was no need to target them with this approach.
 
