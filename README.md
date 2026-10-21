@@ -31,5 +31,6 @@ This repository serves as a continuous learning journal focused on cyber securit
 | 2026-09-7  | FlowFence: Practical Data Protection for Emerging IoT Application Frameworks | USENIX Security '16 | IoT Security | An IFC (Information Flow Control) between data sources and sinks | [Read Note](./IOT-Security-Notes/Practical-Data-Protection-IOT/Notes.md) |
 | 2026-09-13 | FIPS PUB 202 (SHA-3 Standard) | NIST | Cryptography | Introduces the SHA-3 family, designed to supplement the older SHA-2 family | [Read Note](./Cryptography/Hashing/FIP%20202%20SHA3/Notes.md) |
 | 2026-09-19 | The Art, Science, and Engineering of Fuzzing: A Survey |  IEEE '19 | Fuzzing |  give the field a common vocabulary, one general model that fits every kind of fuzzer, and a taxonomy of the literature | [Read Note](./Fuzzing/Fuzzing%20Art,%20Science,%20and%20Engineering/readme.md) |
-|2026-09-26|Machine Learning for input fuzzing | Arxiv '17 |Fuzzing | Using RNN to generate fuzzing input | [ReadNote](./Fuzzing/Machine%20Learning%20for%20Input%20Fuzzing/readme.md)
-|2026-10-11| mGPTFuzz | USENIX '24 | Fuzzing | Large Language Model Assisted Fuzzing of Matter IoT Devices | [ReadNote](.Fuzzing/mGPTFuzz/Note.md)
+|2026-09-26|Machine Learning for input fuzzing | Arxiv '17 |Fuzzing | Using RNN to generate fuzzing input | [ReadNote](./Fuzzing/Machine%20Learning%20for%20Input%20Fuzzing/readme.md) |
+|2026-10-11| mGPTFuzz | USENIX '24 | Fuzzing | Large Language Model Assisted Fuzzing of Matter IoT Devices | [ReadNote](.Fuzzing/mGPTFuzz/Note.md) |
+|2026-10-18| ChatAFL | NDSS '24 | Fuzzing | Large Language Model Assisted Fuzzing of Internet Protocols | [ReadNote](./Fuzzing/ChatAFL/note.md) |
