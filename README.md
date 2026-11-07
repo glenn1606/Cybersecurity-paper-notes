@@ -34,3 +34,4 @@ This repository serves as a continuous learning journal focused on cyber securit
 |2026-09-26|Machine Learning for input fuzzing | Arxiv '17 |Fuzzing | Using RNN to generate fuzzing input | [ReadNote](./Fuzzing/Machine%20Learning%20for%20Input%20Fuzzing/readme.md) |
 |2026-10-11| mGPTFuzz | USENIX '24 | Fuzzing | Large Language Model Assisted Fuzzing of Matter IoT Devices | [ReadNote](.Fuzzing/mGPTFuzz/Note.md) |
 |2026-10-18| ChatAFL | NDSS '24 | Fuzzing | Large Language Model Assisted Fuzzing of Internet Protocols | [ReadNote](./Fuzzing/ChatAFL/note.md) |
+|2026-10-26| FirmAFL | USENIX '24 | Fuzzing | Augmented Process Emulation for Fuzzing | [ReadNote](./Fuzzing/FirmAFL/Note_FirmAFL.md)|
