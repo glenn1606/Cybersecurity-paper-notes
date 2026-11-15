@@ -35,3 +35,4 @@ This repository serves as a continuous learning journal focused on cyber securit
 |2026-10-11| mGPTFuzz | USENIX '24 | Fuzzing | Large Language Model Assisted Fuzzing of Matter IoT Devices | [ReadNote](.Fuzzing/mGPTFuzz/Note.md) |
 |2026-10-18| ChatAFL | NDSS '24 | Fuzzing | Large Language Model Assisted Fuzzing of Internet Protocols | [ReadNote](./Fuzzing/ChatAFL/note.md) |
 |2026-10-26| FirmAFL | USENIX '24 | Fuzzing | Augmented Process Emulation for Fuzzing | [ReadNote](./Fuzzing/FirmAFL/Note_FirmAFL.md)|
+|2026-11-2 | eModelGen | IEEE '23 | ECHONET Lite | Automated Data Model Generation For ECHONETLITE From Textual Specifications | [ReadNote](./Fuzzing/Automated%20Data%20Model%20Gen%20From%20Textual%20Spec/Note_eModelGen.md) |
