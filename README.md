@@ -33,6 +33,8 @@ This repository serves as a continuous learning journal focused on cyber securit
 | 2026-09-19 | The Art, Science, and Engineering of Fuzzing: A Survey |  IEEE '19 | Fuzzing |  give the field a common vocabulary, one general model that fits every kind of fuzzer, and a taxonomy of the literature | [Read Note](./Fuzzing/Fuzzing%20Art,%20Science,%20and%20Engineering/readme.md) |
 |2026-09-26|Machine Learning for input fuzzing | Arxiv '17 |Fuzzing | Using RNN to generate fuzzing input | [ReadNote](./Fuzzing/Machine%20Learning%20for%20Input%20Fuzzing/readme.md) |
 |2026-10-11| mGPTFuzz | USENIX '24 | Fuzzing | Large Language Model Assisted Fuzzing of Matter IoT Devices | [ReadNote](.Fuzzing/mGPTFuzz/Note.md) |
-|2026-10-18| ChatAFL | NDSS '24 | Fuzzing | Large Language Model Assisted Fuzzing of Internet Protocols | [ReadNote](./Fuzzing/ChatAFL/note.md) |
+|2026-10-18| ChatAFL | NDSS '24 | Fuzzing | Large Language Model Assisted Fuzzing of Internet Protocols | [ReadNote](./FuzzingIOT-Security-Notes/Karonte_Detecting_Insecure_Multi-binary_Interactions_in_Embedded_Firmware/Note_Karonte.md/ChatAFL/note.md) |
 |2026-10-26| FirmAFL | USENIX '24 | Fuzzing | Augmented Process Emulation for Fuzzing | [ReadNote](./Fuzzing/FirmAFL/Note_FirmAFL.md)|
 |2026-11-2 | eModelGen | IEEE '23 | ECHONET Lite | Automated Data Model Generation For ECHONETLITE From Textual Specifications | [ReadNote](./Fuzzing/Automated%20Data%20Model%20Gen%20From%20Textual%20Spec/Note_eModelGen.md) |
+|2026-11-10| Karonte | IEEE & S&P '20| IOT | Detecting Insecure Multi-binary Interactions in Embedded Firmware | [ReadNote](./Detecting%20Insecure%20Multi-binary%20Interactions%20in%20Embedded%20Firmware) |
+|2026-11-17 | WYCINWYC | NDSS '18 | Fuzzing | Why fuzzing embedded devices under-detects bugs | [ReadNote](./Fuzzing/WhatYouCorruptIsNotWhatYouCrash/Note_WYCINWYC.md) |
