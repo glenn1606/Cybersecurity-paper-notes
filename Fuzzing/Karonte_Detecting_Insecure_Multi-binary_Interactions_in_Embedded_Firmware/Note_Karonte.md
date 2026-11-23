@@ -125,10 +125,3 @@ KARONTE is a good example of a paper whose real contribution is a **disciplined 
 
 **For my own fuzzing learning journey:** this paper sharpened my sense that "where is the attacker-controlled data, and what does it have to pass through before it matters" is a question worth asking explicitly, not just assuming it stops at the protocol responder. It also gave me a second strong example (after eModelGen) of staged pipeline design with per-stage evaluation, and a very concrete way to think about and report the human-time cost an automated approach saves — something I should build into my own evaluation plan from the start rather than add at the end.
 
-**Next steps:**
-
-- [x] Read KARONTE (IEEE S&P 2020) for multi-binary firmware interaction background
-- [ ] Read BootStomp (USENIX Security 2017), since KARONTE's taint engine is built on top of it
-- [ ] Read *What You Corrupt Is Not What You Crash* (Muench et al., NDSS 2018), cited here and already on my earlier list, to understand firmware fuzzing limitations from another angle
-- [ ] Check whether any open-source ECHONET Lite device stacks (uEcho, echonet-lite npm package) expose or hint at multi-process designs worth knowing about before building a harness
-- [ ] Think about whether my fuzzing oracle should check not just the EL response but any side effects (logs, secondary services) that a more KARONTE-like "what else consumes this data" mindset would flag
