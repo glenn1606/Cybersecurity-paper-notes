@@ -122,12 +122,3 @@ These are the points I want to remember for my own project, not just for this pa
 This paper is a good example of **spec-to-structured-data automation in the exact domain I want to fuzz**. The technical idea (BERT similarity to shorten names) is simple, and I probably wouldn't use it directly. The value for me is in the design and process lessons: use the machine-readable spec that already exists, separate the fuzzy part from the deterministic part, measure what you actually claim, don't confuse "valid format" with "correct meaning", and keep experts in the loop.
 
 **For my own fuzzing learning journey:** it made the ECHONET Lite spec feel concrete (EOJ, EPC, access rules, data types) and showed me that for this protocol the hard part may not be *reading* the spec but *using its semantics* to generate seeds and check responses. It also reminded me that the evaluation design (metrics, baselines, manual effort) is as important as the tool itself.
-
-**Next steps:**
-
-- [x] Read the ECHONET Lite data-model generation paper (IEEE Access 2023) for protocol and spec background
-- [ ] Get the ECHONET Device Objects JSON spec (Machine Readable Appendix) and look at the EOJ/EPC/access-rule structure
-- [ ] Read the ECHONET Lite message format spec (frame structure, ESV services) to see what the fuzzer will actually send
-- [ ] Read the IPSJ class-based risk assessment paper to pick which device classes to prioritize
-- [ ] Read LogicFuzz (NDSS 2026) and Nakanishi et al. (LLM-generated seeds for IoT fuzzing) and compare with my idea
-- [ ] Try an open-source EL library (for example uEcho or echonet-lite) to build a first controller/harness against a simulator or real device
